@@ -3,8 +3,8 @@ package com.swirlds.platform.test.fixtures.event.generator;
 
 import static com.swirlds.platform.test.fixtures.event.EventUtils.staticDynamicValue;
 import static com.swirlds.platform.test.fixtures.event.EventUtils.weightedChoice;
-import static com.swirlds.platform.test.fixtures.event.RandomEventUtils.DEFAULT_FIRST_EVENT_TIME_CREATED;
 
+import com.hedera.hapi.node.base.SemanticVersion;
 import com.swirlds.common.context.PlatformContext;
 import com.swirlds.common.platform.NodeId;
 import com.swirlds.platform.ConsensusImpl;
@@ -37,6 +37,7 @@ import java.util.Objects;
  * A utility class for generating a graph of events.
  */
 public class StandardGraphGenerator extends AbstractGraphGenerator {
+    public static final Instant DEFAULT_FIRST_EVENT_TIME_CREATED = Instant.ofEpochMilli(1588771316678L);
 
     /**
      * A list of sources. There is one source per node that is being simulated.
@@ -481,6 +482,11 @@ public class StandardGraphGenerator extends AbstractGraphGenerator {
         for (final EventImpl event : nonAncientEvents) {
             updateConsensus(event);
         }
+    }
+
+    @Override
+    public void setEventVersion(@NonNull final SemanticVersion eventVersion) {
+        sources.forEach(source -> source.setEventVersion(eventVersion));
     }
 
     @SuppressWarnings("unused") // useful for debugging

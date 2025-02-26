@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.swirlds.platform.system.events;
 
+import com.hedera.hapi.node.base.SemanticVersion;
 import com.hedera.hapi.platform.event.EventCore;
 import com.hedera.hapi.util.HapiUtils;
 import com.hedera.pbj.runtime.io.buffer.Bytes;
@@ -47,7 +48,7 @@ public class UnsignedEvent implements Hashable {
      * @param transactions    list of transactions included in this event instance
      */
     public UnsignedEvent(
-            @NonNull final SoftwareVersion softwareVersion,
+            @NonNull final SemanticVersion softwareVersion,
             @NonNull final NodeId creatorId,
             @Nullable final EventDescriptorWrapper selfParent,
             @NonNull final List<EventDescriptorWrapper> otherParents,
@@ -63,7 +64,7 @@ public class UnsignedEvent implements Hashable {
                 this.metadata.getAllParents().stream()
                         .map(EventDescriptorWrapper::eventDescriptor)
                         .toList(),
-                softwareVersion.getPbjSemanticVersion());
+                softwareVersion);
     }
 
     /**

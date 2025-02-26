@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.swirlds.platform.test.fixtures.event.generator;
 
+import com.hedera.hapi.node.base.SemanticVersion;
 import com.swirlds.common.platform.NodeId;
 import com.swirlds.platform.internal.EventImpl;
 import com.swirlds.platform.system.address.AddressBook;
@@ -147,4 +148,6 @@ public interface GraphGenerator {
      * @param nodeId the node to remove
      */
     void removeNode(@NonNull final NodeId nodeId);
+
+    void setEventVersion(@NonNull SemanticVersion eventVersion);
 }
